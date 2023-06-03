@@ -34,12 +34,18 @@ if response.status_code == 200:
     
     # Create a PyArrow table from the DataFrame
     table = pa.Table.from_pandas(df, schema=schema)
+
+    # Convert the Unix timestamp to a datetime object
+    date = datetime.fromtimestamp(end_timestamp)
+
+    # Format the datetime object as a string
+    end_date_string = date.strftime("%d_%B_%Y")
     
     # Define the CSV file path
     # csv_file_path = '/home/pablo/final_project/data/flight_data3.csv'
     
     # Define the Parquet file path
-    parquet_file_path = '/home/pablo/final_project/data/flight_data3.parquet'
+    parquet_file_path = f'/home/pablo/final_project/data/flight_data{end_date_string}.parquet'
     
     # Write the table to a Parquet file
     # df.to_csv(csv_file_path, index=False)
